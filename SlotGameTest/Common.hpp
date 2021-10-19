@@ -12,7 +12,7 @@ enum class State
 // ゲームデータ
 struct GameData
 {
-
+	
 
 };
 

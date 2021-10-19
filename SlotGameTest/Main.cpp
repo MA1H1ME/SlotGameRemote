@@ -4,14 +4,18 @@
 #include"GameScene.h"
 void Main()
 {
+	Window::Resize(1280,600);
+	GameScene* GS;
 	// （Esc キーで終了しないようにする場合はコメントを外す）
 		//System::SetTerminationTriggers(UserAction::CloseButtonClicked);
+#pragma region 見ないとこ
+
 
 		// タイトルを設定
 	Window::SetTitle(U"スロットゲーム");
 
 	// 背景色を設定
-	Scene::SetBackground(ColorF(0.2, 0.8, 0.4));
+	Scene::SetBackground(ColorF(1, 1, 1));
 
 	// 使用するフォントアセットを登録
 	FontAsset::Register(U"Title", 120, U"example/font/AnnyantRoman/AnnyantRoman.ttf");
@@ -22,11 +26,12 @@ void Main()
 	MyApp manager;
 	manager
 		.add<StartScene>(State::StartScene)
-		.add<GameScene>(State::GameScene)
-		.setFadeColor(ColorF(1.0));
+		.add<GameScene>(State::GameScene);
+		/*.setFadeColor(ColorF(1.0));*/
 
 	// （ゲームシーンから開始する場合はコメントを外す）
-	//manager.init(State::Game);
+	manager.init(State::GameScene);
+#pragma endregion
 
 	while (System::Update())
 	{
