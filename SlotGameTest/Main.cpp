@@ -1,61 +1,42 @@
 ﻿# include <Siv3D.hpp> // OpenSiv3D v0.6.2
-
+#include"Common.hpp"
+#include"StartScene.h"
+#include"GameScene.h"
 void Main()
 {
-	// 背景の色を設定 | Set background color
-	Scene::SetBackground(ColorF{ 0.8, 0.9, 1.0 });
+	// （Esc キーで終了しないようにする場合はコメントを外す）
+		//System::SetTerminationTriggers(UserAction::CloseButtonClicked);
 
-	// 通常のフォントを作成 | Create a new font
-	const Font font{ 60 };
+		// タイトルを設定
+	Window::SetTitle(U"スロットゲーム");
 
-	// 絵文字用フォントを作成 | Create a new emoji font
-	const Font emojiFont{ 60, Typeface::ColorEmoji };
+	// 背景色を設定
+	Scene::SetBackground(ColorF(0.2, 0.8, 0.4));
 
-	// `font` が絵文字用フォントも使えるようにする | Set emojiFont as a fallback
-	font.addFallback(emojiFont);
+	// 使用するフォントアセットを登録
+	FontAsset::Register(U"Title", 120, U"example/font/AnnyantRoman/AnnyantRoman.ttf");
+	FontAsset::Register(U"Menu", 30, Typeface::Regular);
+	FontAsset::Register(U"Score", 36, Typeface::Bold);
 
-	// 画像ファイルからテクスチャを作成 | Create a texture from an image file
-	const Texture texture{ U"example/windmill.png" };
+	// シーンと遷移時の色を設定
+	MyApp manager;
+	manager
+		.add<StartScene>(State::StartScene)
+		.add<GameScene>(State::GameScene)
+		.setFadeColor(ColorF(1.0));
 
-	// 絵文字からテクスチャを作成 | Create a texture from an emoji
-	const Texture emoji{ U"🐈"_emoji };
-
-	// 絵文字を描画する座標 | Coordinates of the emoji
-	Vec2 emojiPos{ 300, 150 };
-
-	// テキストを画面にデバッグ出力 | Print a text
-	Print << U"Push [A] key";
+	// （ゲームシーンから開始する場合はコメントを外す）
+	//manager.init(State::Game);
 
 	while (System::Update())
 	{
-		// テクスチャを描く | Draw a texture
-		texture.draw(200, 200);
-
-		// テキストを画面の中心に描く | Put a text in the middle of the screen
-		font(U"Hello, Siv3D!🚀").drawAt(Scene::Center(), Palette::Black);
-
-		// サイズをアニメーションさせて絵文字を描く | Draw a texture with animated size
-		emoji.resized(100 + Periodic::Sine0_1(1s) * 20).drawAt(emojiPos);
-
-		// マウスカーソルに追随する半透明な円を描く | Draw a red transparent circle that follows the mouse cursor
-		Circle{ Cursor::Pos(), 40 }.draw(ColorF{ 1, 0, 0, 0.5 });
-
-		// もし [A] キーが押されたら | When [A] key is down
-		if (KeyA.down())
+		if (!manager.update())
 		{
-			// 選択肢からランダムに選ばれたメッセージをデバッグ表示 | Print a randomly selected text
-			Print << Sample({ U"Hello!", U"こんにちは", U"你好", U"안녕하세요?" });
-		}
-
-		// もし [Button] が押されたら | When [Button] is pushed
-		if (SimpleGUI::Button(U"Button", Vec2{ 640, 40 }))
-		{
-			// 画面内のランダムな場所に座標を移動
-			// Move the coordinates to a random position in the screen
-			emojiPos = RandomVec2(Scene::Rect());
+			break;
 		}
 	}
 }
+
 
 //
 // = アドバイス =
