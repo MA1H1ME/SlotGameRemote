@@ -4,18 +4,19 @@
 #include"GameScene.h"
 void Main()
 {
-	Window::Resize(1280,600);
-	GameScene* GS;
+	
+#pragma region 見ないとこ
+	Window::Resize(1280, 600);
 	// （Esc キーで終了しないようにする場合はコメントを外す）
 		//System::SetTerminationTriggers(UserAction::CloseButtonClicked);
-#pragma region 見ないとこ
 
 
+	Rect(Arg::center(620, 200), 500, 800).draw(Palette::White);
 		// タイトルを設定
 	Window::SetTitle(U"スロットゲーム");
 
 	// 背景色を設定
-	Scene::SetBackground(ColorF(1, 1, 1));
+	Scene::SetBackground(Color(200, 191, 231));
 
 	// 使用するフォントアセットを登録
 	FontAsset::Register(U"Title", 120, U"example/font/AnnyantRoman/AnnyantRoman.ttf");
