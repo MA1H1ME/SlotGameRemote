@@ -7,31 +7,35 @@ GameScene::GameScene(const InitData& init)
 
 }
 void GameScene::update()  {
-	
-	Txt_Reel1.draw(370, reel1NowPos);
-	Txt_Reel2.draw(550, reel2NowPos);
-	Txt_Reel3.draw(730, reel3NowPos);
 
-	reel1NowPos += speed;
-	if (reel1NowPos <= ReelMaxPos)
+	
+	Txt_Reel1A.draw(Reel1A_NowPos);
+	Txt_Reel2A.draw(Reel2A_NowPos);
+	Txt_Reel3A.draw(Reel3A_NowPos);
+	Txt_Reel1B.draw(Reel1B_NowPos);
+	Txt_Reel2B.draw(Reel2B_NowPos);
+	Txt_Reel3B.draw(Reel3B_NowPos);
+
+
+	Reel1A_NowPos += speed;
+	Reel1B_NowPos += speed;
+
+	if (Reel1A_NowPos.y>Reel_MaxPos)
 	{
-		reel1NowPos == reel1initialPos;
-		return;
+		Reel1A_NowPos.y = Reel1B_NowPos.y - 720;
+	}
+	if (Reel1B_NowPos.y > Reel_MaxPos)
+	{
+		Reel1B_NowPos.y = Reel1A_NowPos.y - 720;
 	}
 	
-	
-	//reel2NowPos += speed;
-//	reel3NowPos += speed;
-	
+	/*Print << Reel1A_NowPos;
+	Print << Reel1B_NowPos;*/
 		
-	
-	
-
+		
 }
 void GameScene::draw() const  
-{
-
-	
+{	
 	txt_Dai.resized(890).draw(180, 0);
 	txt_StopButton1.resized(80).draw(405, 300);
 	txt_StopButton2.resized(80).draw(585, 300);

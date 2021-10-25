@@ -10,28 +10,40 @@ private:
 	const Texture txt_StopButton3{ U"example/texture/StopButton.png" };
 
 	//リールTexture
-    const Texture Txt_Reel1{U"example/Reel/Reel.png"};
-	const Texture Txt_Reel2{ U"example/Reel/Reel.png" };
-	const Texture Txt_Reel3{ U"example/Reel/Reel.png" };
+    const Texture Txt_Reel1A{U"example/Reel/Reel.png"};
+	const Texture Txt_Reel2A{ U"example/Reel/Reel.png" };
+	const Texture Txt_Reel3A{ U"example/Reel/Reel.png" };
+	const Texture Txt_Reel1B{ U"example/Reel/Reel.png" };
+	const Texture Txt_Reel2B{ U"example/Reel/Reel.png" };
+	const Texture Txt_Reel3B{ U"example/Reel/Reel.png" };
 	int count = 0;
 
 	//リールの初期位置
-	const int reel1initialPos = -440;
-	const int reel2initialPos = -360;
-	const int reel3initialPos =-40 ;
+	const int reel1A_initialPos = -440;
+	const int reel2A_initialPos = -360;
+	const int reel3A_initialPos =-40 ;
 
-	//リールの今の位置
-    int reel1NowPos = reel1initialPos;
-	int reel2NowPos = reel2initialPos;
-	int reel3NowPos = reel3initialPos;
+	const int reel1B_initialPos = -440+(-720);
+	const int reel2B_initialPos = -360 + (-720);
+	const int reel3B_initialPos = -40 + (-720);
 
-	//リールの回転速度
-	 float speed=5;
 	
+	//リールの回転速度
+	Vec2 speed = Vec2(0.0, 20.0);
+
+	 Vec2 Reel1A_NowPos =  Vec2(370, reel1A_initialPos);
+	 Vec2 Reel2A_NowPos = Vec2(550, reel2A_initialPos);
+	 Vec2 Reel3A_NowPos = Vec2(730,reel3A_initialPos) ;
+
+
+	 Vec2 Reel1B_NowPos = Vec2(370, reel1B_initialPos);
+	 Vec2 Reel2B_NowPos = Vec2(550, reel2B_initialPos);
+	 Vec2 Reel3B_NowPos = Vec2(730, reel3B_initialPos);
 
 
 	 //リールの最大値
-	 const int ReelMaxPos = 40;
+	 const int Reel_MaxPos = 280;
+	 
 	
 
 	bool stopflag1 = false;//ボタンが押されたかどうか
