@@ -30,14 +30,23 @@ private:
 	};
 	//リールの回転速度
 	Vec2 speed = Vec2(0.0, 32.0);
+
 	//リールの今の場所
-	Array<Vec2>Reel_NowPos = {
+	 Array<Vec2>Reel_NowPos = {
 		Vec2{370, reel_initialPos[0] },
 		Vec2{550, reel_initialPos[0] },
 		Vec2{730, reel_initialPos[0] },
 		Vec2{370, reel_initialPos[1] },
 		Vec2{550, reel_initialPos[1] },
 		Vec2{730, reel_initialPos[1] },
+	};
+	Vec2	 NowMousePos = Vec2{0,0};
+	
+	const int ButtonSize = 40;
+	const 	Array<Vec2>buttonPos = {
+		 Vec2 {440,380},
+		 Vec2{620,380 },
+		 Vec2{800,380}
 	};
 	//リールの最大値
 	const int Reel_MaxPos = 280;
@@ -46,9 +55,13 @@ private:
 	
 
 	//------------------------------------------------
-	bool stopflag1 = false;//ボタンが押されたかどうか
-	bool stopflag2 = false;
-	bool stopflag3 = false;
+	Array <bool>Stopflag{
+		false,
+		false,
+		false,
+		false,
+		false
+	};
 	bool allflag = true;
 
 
@@ -59,7 +72,7 @@ public:
 	void update() override;
 	void draw() const override;
 	void ReelGenetrate();//リール回転
-
+	void StopButton();
 	
 };
 

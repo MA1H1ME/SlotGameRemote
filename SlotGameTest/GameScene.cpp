@@ -8,28 +8,57 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 }
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update()  {
-	
 	ReelGenetrate();
+	StopButton();
+		if (Stopflag[0]== true)
+		{
+			
+		}
+	
 
 	
-	
+}
+//リール回転関数---------------------------------------
+void GameScene::StopButton() {
+	NowMousePos.x = Cursor::Pos().x;
+	NowMousePos.y = Cursor::Pos().y;
+
+	//ボタンをとめる処理
 	if (MouseL.down())
 	{
-		Cursor::Pos();
+		for (int i = 0; i < 3; i++) {
+			auto x = NowMousePos.x - buttonPos[i].x;
+			auto y = NowMousePos.y - buttonPos[i].y;
+			auto dist = sqrt(x * x + y * y);
+			if (dist < ButtonSize) {
+				Stopflag[i] = true;
+				/*Print << NowMousePos;
+				Print << i;*/
+				break;
+			}
+		}
 	}
 }
+
+
 //リール回転関数---------------------------------------
 void GameScene::ReelGenetrate() {
 	//描画
-	for (int i = 0; i <= 5; i++)
-	{
-		Reel_Tex[i].draw(Reel_NowPos[i]);
-		Reel_NowPos[i] += speed;
+	
+		for (int i = 0; i < 6; i++)
+		{
+			Reel_Tex[i].draw(Reel_NowPos[i]);
+			Reel_NowPos[i] += speed;
+			if (Stopflag[i] == true)
+			{
+				speed = Vec2{0,0};
+			}
 	}
+		
 	//リールを入れ替える
-	for (int i = 0; i <= 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		for (int j = 3; j <= 5; j++)
+		for (int j = 3; j < 6; j++)
 		{
 			if (Reel_NowPos[i].y >= Reel_MaxPos)
 			{
@@ -43,7 +72,7 @@ void GameScene::ReelGenetrate() {
 	}
 #pragma region リール回転デバッグ用
 
-	Print << Reel_NowPos[0];
+	//Print << Reel_NowPos[0];
 
 #pragma endregion
 }
@@ -51,9 +80,9 @@ void GameScene::ReelGenetrate() {
 void GameScene::draw() const  
 {	
 	txt_Dai.resized(890).draw(180, 0);
-	Circle{ 440,380,40 }.draw(Palette::Red);
-	Circle{ 620,380,40 }.draw(Palette::Red);
-	Circle{ 800,380,40 }.draw(Palette::Red);
+	Circle{ buttonPos[0],ButtonSize }.draw(Palette::Red);
+	Circle{ buttonPos[1],ButtonSize }.draw(Palette::Red);
+	Circle{ buttonPos[2],ButtonSize }.draw(Palette::Red);
 	/*txt_StopButton1.resized(80).draw(405, 300);
 	txt_StopButton2.resized(80).draw(585, 300);
 	txt_StopButton3.resized(80).draw(765, 300);*/
