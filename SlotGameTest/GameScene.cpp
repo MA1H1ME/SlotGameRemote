@@ -8,7 +8,7 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 }
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update()  {
-	ReelGenetrate();
+	
 	StopButton();
 		if (Stopflag[0]== true)
 		{
@@ -31,12 +31,21 @@ void GameScene::StopButton() {
 			auto y = NowMousePos.y - buttonPos[i].y;
 			auto dist = sqrt(x * x + y * y);
 			if (dist < ButtonSize) {
-				Stopflag[i] = true;
-				/*Print << NowMousePos;
-				Print << i;*/
+				
+				Print << NowMousePos;
+				Print << i;
+				if (i==0)
+				{
+					Stopflag[0] = true;
+					Stopflag[3] = true;
+				}
 				break;
 			}
 		}
+	}
+	else
+	{
+		ReelGenetrate();
 	}
 }
 
@@ -45,15 +54,21 @@ void GameScene::StopButton() {
 void GameScene::ReelGenetrate() {
 	//描画
 	
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 3; i++)
 		{
-			Reel_Tex[i].draw(Reel_NowPos[i]);
-			Reel_NowPos[i] += speed;
-			if (Stopflag[i] == true)
+			for (int j = 3; j < 6; j++)
 			{
-				speed = Vec2{0,0};
+				Reel_Tex[i].draw(Reel_NowPos[i]);
+				Reel_Tex[j].draw(Reel_NowPos[j]);
+				Reel_NowPos[i] += speed;
+				Reel_NowPos[j] += speed;
+				if (Stopflag[0] == true)
+				{
+					
+				}
 			}
-	}
+			
+		}
 		
 	//リールを入れ替える
 	for (int i = 0; i < 3; i++)

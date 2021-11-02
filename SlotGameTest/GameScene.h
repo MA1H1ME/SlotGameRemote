@@ -13,10 +13,10 @@ private:
 	//リールTexture
 	Array<Texture>Reel_Tex = {
 		Texture {U"example/Reel/Reel.png"},
-		Texture {U"example/Reel/Reel.png"},
-		Texture {U"example/Reel/Reel2.png"},
 		Texture {U"example/Reel/Reel2.png"},
 		Texture {U"example/Reel/Reel3.png"},
+		Texture {U"example/Reel/Reel.png"},
+		Texture {U"example/Reel/Reel2.png"},
 		Texture {U"example/Reel/Reel3.png"},
 	};
 #pragma endregion
@@ -29,7 +29,7 @@ private:
 		-440 + (-720)
 	};
 	//リールの回転速度
-	Vec2 speed = Vec2(0.0, 32.0);
+	Vec2 speed = Vec2(0.0, 2.0);
 
 	//リールの今の場所
 	 Array<Vec2>Reel_NowPos = {
