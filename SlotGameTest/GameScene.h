@@ -21,7 +21,7 @@ private:
 	};
 #pragma endregion
 
-
+//------------------------------------------------
 	
 	//リールの初期位置
 	Array<int> reel_initialPos = {
@@ -54,7 +54,7 @@ private:
 	double delayTime = 0.0;
 	Vec2 ReelSize=Vec2{ 0,80 };
 
-	//------------------------------------------------
+//------------------------------------------------------------
 	Array <bool>Stopflag{
 		false,
 		false,
@@ -62,7 +62,7 @@ private:
 		false,
 		false
 	};
-	bool allflag = true;
+	bool allflag = false;
 
 
 //---------------------------------------------------------------

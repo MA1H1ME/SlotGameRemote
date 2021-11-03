@@ -9,29 +9,48 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update() {
 
+	if (allflag == false){
+		if (KeySpace.down()){
+			for (int i = 0; i < 3; i++)
+				Stopflag[i] = false;		
+		}
+	}
+	if (Stopflag[0] != false && Stopflag[1] != false && Stopflag[2] != false){
+			allflag = true;
+			Print << allflag;
+	}
+	if (allflag != true){
+		if (Stopflag[0] != true) {
+			ReelGenetrate1();
+		}
+		else {
+			Reel_Tex[0].draw(Reel_NowPos[0]);
+			Reel_Tex[1].draw(Reel_NowPos[1]);
+		}
+		if (Stopflag[1] != true) {
+			ReelGenetrate2();
+		}
+		else {
+			Reel_Tex[2].draw(Reel_NowPos[2]);
+			Reel_Tex[3].draw(Reel_NowPos[3]);
+		}
+		if (Stopflag[2] != true) {
+			ReelGenetrate3();
+		}
+		else {
+			Reel_Tex[4].draw(Reel_NowPos[4]);
+			Reel_Tex[5].draw(Reel_NowPos[5]);
+		}
+	}
+	else{
+		allflag = false;
+		for (int i = 0; i < 6; i++)
+			Reel_Tex[i].draw(Reel_NowPos[i]);				
+	}
+	
+	
 	StopButton();
-	if (Stopflag[0] == false) {
-		ReelGenetrate1();
-	}
-	else
-	{
-		Reel_Tex[0].draw(Reel_NowPos[0]);
-		Reel_Tex[1].draw(Reel_NowPos[1]);
-	}
-	if (Stopflag[1] == false) {
-		ReelGenetrate2();
-	}
-	else {
-		Reel_Tex[2].draw(Reel_NowPos[2]);
-		Reel_Tex[3].draw(Reel_NowPos[3]);
-	}
-	if (Stopflag[2] == false) {
-		ReelGenetrate3();
-	}
-	else {
-		Reel_Tex[4].draw(Reel_NowPos[4]);
-		Reel_Tex[5].draw(Reel_NowPos[5]);
-	}
+	
 }
 //リール回転関数---------------------------------------
 void GameScene::StopButton() {
@@ -47,11 +66,13 @@ void GameScene::StopButton() {
 			if (dist < ButtonSize) {
 				/*Print << NowMousePos;
 				Print << i;	*/		
-					Stopflag[i] = true;			
+					Stopflag[i] = true;
+					/*Print << Stopflag[i];*/
 				break;
 			}
 		}
 	}
+	
 }
 
 //リール回転関数---------------------------------------
