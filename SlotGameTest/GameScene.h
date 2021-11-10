@@ -40,8 +40,10 @@ private:
 		Vec2{730, reel_initialPos[0] },
 		Vec2{730, reel_initialPos[1] },
 	};
-	Vec2	 NowMousePos = Vec2{0,0};
-	
+	 Vec2	 NowMousePos = Vec2{ 0,0 };
+	 Array<double>ReelPosY{
+		 0,0,0
+	 };
 	const int ButtonSize = 40;
 	const 	Array<Vec2>buttonPos = {
 		 Vec2 {440,380},
@@ -75,7 +77,7 @@ public:
 	void ReelGenetrate2();//リール回転
 	void ReelGenetrate3();//リール回転
 	void StopButton();
-	
+	void ReelControll();
 };
 
 

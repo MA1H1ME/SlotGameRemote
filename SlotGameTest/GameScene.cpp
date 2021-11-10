@@ -8,47 +8,9 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 }
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update() {
-
-	if (allflag == false){
-		if (KeySpace.down()){
-			for (int i = 0; i < 3; i++)
-				Stopflag[i] = false;		
-		}
-	}
-	if (Stopflag[0] != false && Stopflag[1] != false && Stopflag[2] != false){
-			allflag = true;
-			Print << allflag;
-	}
-	if (allflag != true){
-		if (Stopflag[0] != true) {
-			ReelGenetrate1();
-		}
-		else {
-			Reel_Tex[0].draw(Reel_NowPos[0]);
-			Reel_Tex[1].draw(Reel_NowPos[1]);
-		}
-		if (Stopflag[1] != true) {
-			ReelGenetrate2();
-		}
-		else {
-			Reel_Tex[2].draw(Reel_NowPos[2]);
-			Reel_Tex[3].draw(Reel_NowPos[3]);
-		}
-		if (Stopflag[2] != true) {
-			ReelGenetrate3();
-		}
-		else {
-			Reel_Tex[4].draw(Reel_NowPos[4]);
-			Reel_Tex[5].draw(Reel_NowPos[5]);
-		}
-	}
-	else{
-		allflag = false;
-		for (int i = 0; i < 6; i++)
-			Reel_Tex[i].draw(Reel_NowPos[i]);				
-	}
 	
-	
+	Print << Reel_NowPos[0];
+	ReelControll();
 	StopButton();
 	
 }
@@ -75,6 +37,48 @@ void GameScene::StopButton() {
 	
 }
 
+//リールを回す処理とフラグ管理と止めたあとの処理
+void GameScene:: ReelControll() {
+	
+	if (Stopflag[0] != false && Stopflag[1] != false && Stopflag[2] != false && KeySpace.down()) {
+		allflag = true;
+		if (allflag == true)
+		{
+			for (int i = 0; i < 3; i++)
+				Stopflag[i] = false;
+		}
+	}
+	if (allflag != true) {
+		allflag = false;
+		if (Stopflag[0] != true) {
+			ReelGenetrate1();
+		}
+		else if (Stopflag[0] == true && 10.0f <=Abs( fmod(Reel_NowPos[0].y,8.0f)) && 0.85f >= Abs(fmod(Reel_NowPos[0].y, 8.0f))) {
+			Reel_Tex[0].draw(Reel_NowPos[0]);
+			Reel_Tex[1].draw(Reel_NowPos[1]);
+			
+		}
+		if (Stopflag[1] != true) {
+			ReelGenetrate2();
+		}
+		else {
+			Reel_Tex[2].draw(Reel_NowPos[2]);
+			Reel_Tex[3].draw(Reel_NowPos[3]);
+		}
+		if (Stopflag[2] != true) {
+			ReelGenetrate3();
+		}
+		else {
+			Reel_Tex[4].draw(Reel_NowPos[4]);
+			Reel_Tex[5].draw(Reel_NowPos[5]);
+		}
+	}
+	else {
+		allflag = false;
+		for (int i = 0; i < 6; i++)
+			Reel_Tex[i].draw(Reel_NowPos[i]);
+	}
+}
 //リール回転関数---------------------------------------
 void GameScene::ReelGenetrate1() {
 	//描画
