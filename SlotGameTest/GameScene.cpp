@@ -53,7 +53,7 @@ void GameScene:: ReelControll() {
 		if (Stopflag[0] != true) {
 			ReelGenetrate1();
 		}
-		else if (Stopflag[0] == true && 10.0f <=Abs( fmod(Reel_NowPos[0].y,8.0f)) && 0.85f >= Abs(fmod(Reel_NowPos[0].y, 8.0f))) {
+		else /*if (Stopflag[0] == true && 10.0f <=Abs( fmod(Reel_NowPos[0].y,8.0f)) && 0.85f >= Abs(fmod(Reel_NowPos[0].y, 8.0f)))*/ {
 			Reel_Tex[0].draw(Reel_NowPos[0]);
 			Reel_Tex[1].draw(Reel_NowPos[1]);
 			
