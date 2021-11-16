@@ -29,7 +29,7 @@ private:
 		-440 + (-720)
 	};
 	//リールの回転速度
-	Vec2 speed = Vec2(0.0, 20.0);
+	Vec2 speed = Vec2(0.0, 40.0);
 	
 	//リールの今の場所
 	 Array<Vec2>Reel_NowPos = {

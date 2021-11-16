@@ -10,6 +10,7 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 void GameScene::update() {
 	
 	Print << Reel_NowPos[0];
+	Print << Reel_NowPos[1];
 	ReelControll();
 	StopButton();
 	
@@ -49,11 +50,11 @@ void GameScene:: ReelControll() {
 		}
 	}
 	if (allflag != true) {
-		allflag = false;
+		
 		if (Stopflag[0] != true) {
 			ReelGenetrate1();
 		}
-		else /*if (Stopflag[0] == true && 10.0f <=Abs( fmod(Reel_NowPos[0].y,8.0f)) && 0.85f >= Abs(fmod(Reel_NowPos[0].y, 8.0f)))*/ {
+		else{
 			Reel_Tex[0].draw(Reel_NowPos[0]);
 			Reel_Tex[1].draw(Reel_NowPos[1]);
 			
