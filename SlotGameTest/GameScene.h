@@ -50,6 +50,15 @@ private:
 		 Vec2{620,380 },
 		 Vec2{800,380}
 	};
+	const 	Array<int>ReelPos = {
+		-440,
+		-360,
+		-280,
+		-200,
+		-120,
+		-40,
+		40,
+	};
 	//リールの最大値
 	const int Reel_MaxPos = 280;
 	//描画系

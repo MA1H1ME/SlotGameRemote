@@ -37,7 +37,6 @@ void GameScene::StopButton() {
 	}
 	
 }
-
 //リールを回す処理とフラグ管理と止めたあとの処理
 void GameScene:: ReelControll() {
 	
@@ -49,29 +48,74 @@ void GameScene:: ReelControll() {
 				Stopflag[i] = false;
 		}
 	}
+
 	if (allflag != true) {
 		
 		if (Stopflag[0] != true) {
 			ReelGenetrate1();
 		}
-		else{
-			Reel_Tex[0].draw(Reel_NowPos[0]);
-			Reel_Tex[1].draw(Reel_NowPos[1]);
-			
+		if (Stopflag[0] == true) {
+			if (Reel_NowPos[0].y == ReelPos[0] || Reel_NowPos[0].y == ReelPos[1] ||
+			   Reel_NowPos[0].y == ReelPos[2] || Reel_NowPos[0].y == ReelPos[3] ||
+			   Reel_NowPos[0].y == ReelPos[4] || Reel_NowPos[0].y == ReelPos[5] || Reel_NowPos[0].y == ReelPos[6] ||
+			   Reel_NowPos[1].y == ReelPos[0] || Reel_NowPos[1].y == ReelPos[1] ||
+			   Reel_NowPos[1].y == ReelPos[2] || Reel_NowPos[1].y == ReelPos[3] ||
+			   Reel_NowPos[1].y == ReelPos[4] || Reel_NowPos[1].y == ReelPos[5] || Reel_NowPos[1].y == ReelPos[6]) {
+
+				Reel_Tex[0].draw(Reel_NowPos[0]);
+				Reel_Tex[1].draw(Reel_NowPos[1]);
+			}
+			else
+			{
+				Reel_NowPos[0].y += 40;
+				Reel_NowPos[1].y += 40;
+				Reel_Tex[0].draw(Reel_NowPos[0]);
+				Reel_Tex[1].draw(Reel_NowPos[1]);
+			}
 		}
 		if (Stopflag[1] != true) {
 			ReelGenetrate2();
 		}
-		else {
-			Reel_Tex[2].draw(Reel_NowPos[2]);
-			Reel_Tex[3].draw(Reel_NowPos[3]);
+		if (Stopflag[1] == true) {
+			if (Reel_NowPos[2].y == ReelPos[0] || Reel_NowPos[2].y == ReelPos[1] ||
+			   Reel_NowPos[2].y == ReelPos[2] || Reel_NowPos[2].y == ReelPos[3] ||
+			   Reel_NowPos[2].y == ReelPos[4] || Reel_NowPos[2].y == ReelPos[5] || Reel_NowPos[2].y == ReelPos[6] ||
+			   Reel_NowPos[3].y == ReelPos[0] || Reel_NowPos[3].y == ReelPos[1] ||
+			   Reel_NowPos[3].y == ReelPos[2] || Reel_NowPos[3].y == ReelPos[3] ||
+			   Reel_NowPos[3].y == ReelPos[4] || Reel_NowPos[3].y == ReelPos[5] || Reel_NowPos[3].y == ReelPos[6]) {
+
+				Reel_Tex[2].draw(Reel_NowPos[2]);
+				Reel_Tex[3].draw(Reel_NowPos[3]);
+			}
+			else
+			{
+				Reel_NowPos[2].y += 40;
+				Reel_NowPos[3].y += 40;
+				Reel_Tex[2].draw(Reel_NowPos[2]);
+				Reel_Tex[3].draw(Reel_NowPos[3]);
+			}
 		}
 		if (Stopflag[2] != true) {
 			ReelGenetrate3();
 		}
-		else {
-			Reel_Tex[4].draw(Reel_NowPos[4]);
-			Reel_Tex[5].draw(Reel_NowPos[5]);
+		if (Stopflag[2] == true) {
+			if (Reel_NowPos[4].y == ReelPos[0] || Reel_NowPos[4].y == ReelPos[1] ||
+			   Reel_NowPos[4].y == ReelPos[2] || Reel_NowPos[4].y == ReelPos[3] ||
+			   Reel_NowPos[4].y == ReelPos[4] || Reel_NowPos[4].y == ReelPos[5] || Reel_NowPos[4].y == ReelPos[6] ||
+			   Reel_NowPos[5].y == ReelPos[0] || Reel_NowPos[5].y == ReelPos[1] ||
+			   Reel_NowPos[5].y == ReelPos[2] || Reel_NowPos[5].y == ReelPos[3] ||
+			   Reel_NowPos[5].y == ReelPos[4] || Reel_NowPos[5].y == ReelPos[5] || Reel_NowPos[5].y == ReelPos[6]) {
+
+				Reel_Tex[4].draw(Reel_NowPos[4]);
+				Reel_Tex[5].draw(Reel_NowPos[5]);
+			}
+			else
+			{
+				Reel_NowPos[4].y += 40;
+				Reel_NowPos[5].y += 40;
+				Reel_Tex[4].draw(Reel_NowPos[4]);
+				Reel_Tex[5].draw(Reel_NowPos[5]);
+			}
 		}
 	}
 	else {
