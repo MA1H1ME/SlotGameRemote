@@ -4,10 +4,7 @@ class GameScene : public MyApp::Scene {
 private:
 #pragma region 画像読み込み用の場所
 	//本体Texture
-	const Texture txt_Dai{ U"example/texture/Sotowaku.png" };
-	const Texture txt_StopButton1{ U"example/texture/StopButton.png" };
-	const Texture txt_StopButton2{ U"example/texture/StopButton.png" };
-	const Texture txt_StopButton3{ U"example/texture/StopButton.png" };
+	 Texture txt_Dai{ U"example/texture/Sotowaku.png" };
 
 	
 	//リールTexture
@@ -32,7 +29,7 @@ private:
 		-440,
 		-440 + (-720)
 	};	
-	Vec2 speed = Vec2(0.0, 40.0);//リールの回転速度	
+	Vec2 speed = Vec2(0.0, 30.0);//リールの回転速度	
 	const int Reel_MaxPos = 280;//リールの最大値
 	Vec2 ReelSize = Vec2{ 0,80 };//リール一個分の大きさ
 	const Array<int>ReelPos = {//リールのポジション
@@ -71,6 +68,25 @@ private:
 	};
 	bool allflag = false;
 
+//------------------------------------------------------------
+	// FPSシュミレーションステップ
+	const double stepSec = (1.0 / 200.0);
+
+	// 蓄積時間（秒）
+	double accumulatorSec = 0.0;
+//------------------------------------------------------------
+	int Rndins;
+	const int RndMax = 16384;
+//---------------------------------------------------------------
+	int yaku=0;
+	const int HitLange_1 = 0;
+	const int HitLange_2 = 112;
+	const int HitLange_3 = 162;
+	const int HitLange_4 = 212;
+	const int HitLange_5 = 904;
+	const int HitLange_6 = 2754;
+	const int HitLange_7 = 4999;
+	const int HitLange_8 = RndMax;
 //---------------------------------------------------------------
 public:
 
@@ -81,7 +97,8 @@ public:
 	void ReelGenetrate2();//リール回転
 	void ReelGenetrate3();//リール回転
 	void StopButton();//ボタン停止
-	void ReelControll(int yaku);//リールを止める
+	void ReelControll(int a);//あとの処理(入る役)
+	void ReelGen();//リール決定やフラグ管理
 };
 
 
