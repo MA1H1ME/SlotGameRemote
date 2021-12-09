@@ -89,12 +89,12 @@ void GameScene:: ReelControll(int a) {
 		case 1://7
 			Print << U"1";
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
-				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
-				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[3]);
+				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[3] + 720);
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
-				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
-				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[5]);
+				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[5] + 720);
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
@@ -105,8 +105,8 @@ void GameScene:: ReelControll(int a) {
 		case 2://チェリー
 			Print << U"2";
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
-				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
-				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[2]);
+				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[2] + 720);
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
@@ -121,64 +121,64 @@ void GameScene:: ReelControll(int a) {
 		case 3://プルーン
 			Print << U"3";
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
-				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
-				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[4]);
+				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[4] + 720);
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
-				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
-				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[4]);
+				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[4] + 720);
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
-				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
-				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[5]);
+				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[5] + 720);
 			}
 			break;
 
 		case 4://オレンジ
 			Print << U"4";
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
-				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
-				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[1]);
+				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[1] + 720);
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
-				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
-				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[2]);
+				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[2] + 720);
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
-				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
-				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[2]);
+				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[2] + 720);
 			}
 			break;
 
 		case 5://ベル
 			Print << U"5";
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
-				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
-				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[6]);
+				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[6] + 720);
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
-				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
-				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[3]);
+				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[3] + 720);
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
-				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
-				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[1]);
+				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[1] + 720);
 			}
 			break;
 
 		case 6://バー
 			Print << U"6";
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
-				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
-				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[6]);
+				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[6] + 720);
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
-				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
-				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[5]);
+				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[5] + 720);
 			}
 			break;
 
