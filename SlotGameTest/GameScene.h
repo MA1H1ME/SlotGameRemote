@@ -88,6 +88,9 @@ private:
 	const int HitLange_7 = 4999;
 	const int HitLange_8 = RndMax;
 //---------------------------------------------------------------
+	const Audio stop_s{ U"example/select.mp3" };
+	
+//---------------------------------------------------------------
 public:
 
 	GameScene(const InitData& init);//シーン管理

@@ -9,10 +9,11 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update() {
 	for (accumulatorSec += Scene::DeltaTime(); stepSec <= accumulatorSec; accumulatorSec -= stepSec){//FPS制限的なやつ
+		stop_s.setVolume(0.0f);
 		StopButton();
 		ReelGen();
 	}
-
+	
 }
 //リール回転関数---------------------------------------
 void GameScene::StopButton() {
@@ -24,6 +25,7 @@ void GameScene::StopButton() {
 	//ボタンをとめる処理
 	if (MouseL.down())	{
 		for (int i = 0; i < 3; i++) {
+			stop_s.playOneShot();
 			auto x = NowMousePos.x - buttonPos[i].x;
 			auto y = NowMousePos.y - buttonPos[i].y;
 			auto dist = sqrt(x * x + y * y);
@@ -171,6 +173,7 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[6]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[6] + 720);
+
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
