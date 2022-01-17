@@ -62,12 +62,17 @@ private:
 	
 //------------------------------------------------------------
 	Array <bool>Stopflag{//各リールのストップフラグ
+		true,
+		true,
+		true,
+	};
+	bool allflag = false;
+	Array <bool>Yakuflag{//各リールの約確定フラグ
 		false,
 		false,
 		false,
 	};
-	bool allflag = false;
-
+	bool allYakuflag = false;
 //------------------------------------------------------------
 	// FPSシュミレーションステップ
 	const double stepSec = (1.0 / 200.0);
@@ -88,8 +93,11 @@ private:
 	const int HitLange_7 = 4999;
 	const int HitLange_8 = RndMax;
 //---------------------------------------------------------------
-	const Audio stop_s{ U"example/select.mp3" };
-	
+	const Audio Money_s{ U"example/Sound/coin03.mp3" };
+	const Audio Stop_s{ U"example/Sound/ButtonStop.mp3" };
+	const Audio Atari_s{ U"example/Sound/Atari.mp3" };
+	const Audio Reba_s{ U"example/Sound/Reba-.mp3" };
+	const Audio Hazure_s{ U"example/Sound/Hazure.mp3" };
 //---------------------------------------------------------------
 public:
 

@@ -1,4 +1,5 @@
 ﻿#include"GameScene.h"
+#include<Windows.h>
 
 GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 	:IScene(init)
@@ -8,11 +9,10 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 }
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update() {
-	for (accumulatorSec += Scene::DeltaTime(); stepSec <= accumulatorSec; accumulatorSec -= stepSec){//FPS制限的なやつ
-		stop_s.setVolume(0.0f);
+	
 		StopButton();
 		ReelGen();
-	}
+		
 	
 }
 //リール回転関数---------------------------------------
@@ -25,15 +25,15 @@ void GameScene::StopButton() {
 	//ボタンをとめる処理
 	if (MouseL.down())	{
 		for (int i = 0; i < 3; i++) {
-			stop_s.playOneShot();
+			
 			auto x = NowMousePos.x - buttonPos[i].x;
 			auto y = NowMousePos.y - buttonPos[i].y;
 			auto dist = sqrt(x * x + y * y);
 			if (dist < ButtonSize) {
-				/*Print << NowMousePos;
-				Print << i;	*/		
+				
+				Stop_s.playOneShot();
 					Stopflag[i] = true;
-					/*Print << Stopflag[i];*/
+					
 				break;
 			}
 		}
@@ -42,9 +42,12 @@ void GameScene::StopButton() {
 }
 
 void GameScene::ReelGen() {
-	if (Stopflag[0] != false && Stopflag[1] != false && Stopflag[2] != false && KeySpace.down()) {
-
+ 	if (Stopflag[0] != false && Stopflag[1] != false && Stopflag[2] != false && KeySpace.down()) {
+		allYakuflag = true;
 		allflag = true;
+		Money_s.playOneShot();
+		Reba_s.play();
+		Sleep(1 * 1000);
 		if (allflag == true){
 			for (int i = 0; i < 3; i++)
 				Stopflag[i] = false;
@@ -78,7 +81,7 @@ void GameScene::ReelGen() {
 
 void GameScene:: ReelControll(int a) {
 	if (allflag != true){
-		
+	
 		if (Stopflag[0] == false) //リール１を回す
 			ReelGenetrate1();		
 		if (Stopflag[1] == false) //リール2を回す
@@ -90,18 +93,28 @@ void GameScene:: ReelControll(int a) {
 		{
 		case 1://7
 			Print << U"1";
+			
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[3]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[3] + 720);
+				Yakuflag[0] = true;
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[5]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[5] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Yakuflag[2] = true;
 			}
+			if (Yakuflag[0] == true && Yakuflag[1] == true && Yakuflag[2] == true) {
+				Atari_s.play();
+				allYakuflag = false;
+			}
+			
+			
 			break;
 
 		case 2://チェリー
@@ -109,14 +122,30 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[2]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[2] + 720);
+				Yakuflag[0] = true;
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Yakuflag[2] = true;
+			}
+			if (Yakuflag[0] == true && Yakuflag[1] == true && Yakuflag[2] == true) {
+				allYakuflag = true;
+			}
+			if (allYakuflag == true)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					Yakuflag[i] = false;
+					
+				}
+				Atari_s.play();
+				allYakuflag = false;
 			}
 			break;
 
@@ -125,14 +154,30 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[4]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[4] + 720);
+				Yakuflag[0] = true;
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[4]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[4] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[5]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[5] + 720);
+				Yakuflag[2] = true;
+			}
+			if (Yakuflag[0] == true && Yakuflag[1] == true && Yakuflag[2] == true) {
+				allYakuflag = true;
+			}
+			if (allYakuflag == true)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					Yakuflag[i] = false;
+					
+				}
+				Atari_s.play();
+				allYakuflag = false;
 			}
 			break;
 
@@ -141,14 +186,30 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[1]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[1] + 720);
+				Yakuflag[0] = true;
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[2]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[2] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[2]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[2] + 720);
+				Yakuflag[2] = true;
+			}
+
+			if (Yakuflag[0] == true && Yakuflag[1] == true && Yakuflag[2] == true) {
+				allYakuflag = true;
+			}
+			if (allYakuflag == true)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					Yakuflag[i] = false;	
+				}
+				Atari_s.play();
+				allYakuflag = false;
 			}
 			break;
 
@@ -157,15 +218,34 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[6]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[6] + 720);
+				Yakuflag[0] = true;
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[3]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[3] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[1]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[1] + 720);
+				Yakuflag[2] = true;
 			}
+					
+			if (Yakuflag[0] == true&& Yakuflag[1] == true && Yakuflag[2] == true ){
+				allYakuflag = true;
+			}
+				
+			if (allYakuflag == true)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					Yakuflag[i] = false;
+					
+				}
+				Atari_s.play();
+				allYakuflag = false;
+			}
+			
 			break;
 
 		case 6://バー
@@ -173,16 +253,33 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[6]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[6] + 720);
+				Yakuflag[0] = true;
 
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[5]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[5] + 720);
+				Yakuflag[2] = true;
 			}
+			
+			if (Yakuflag[0] == true && Yakuflag[1] == true && Yakuflag[2] == true) {
+				allYakuflag = true;
+			}
+			if (allYakuflag == true)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					Yakuflag[i] = false;					
+				}
+				Atari_s.play();
+				allYakuflag = false;
+			}
+			
 			break;
 
 		case 7://無役
@@ -190,14 +287,28 @@ void GameScene:: ReelControll(int a) {
 			if (Stopflag[0] == true) {//ストップボタンが押されたら
 				Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[0]);
 				Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[0] + 720);
+				Yakuflag[0] = true;
 			}
 			if (Stopflag[1] == true) {//ストップボタンが押されたら
 				Reel_Tex[2].draw(Reel_NowPos[2].x, ReelPos[1]);
 				Reel_Tex[3].draw(Reel_NowPos[3].x, ReelPos[1] + 720);
+				Yakuflag[1] = true;
 			}
 			if (Stopflag[2] == true) {//ストップボタンが押されたら
 				Reel_Tex[4].draw(Reel_NowPos[4].x, ReelPos[3]);
 				Reel_Tex[5].draw(Reel_NowPos[5].x, ReelPos[3] + 720);
+				Yakuflag[2] = true;
+			}
+			if (Yakuflag[0] == true && Yakuflag[1] == true && Yakuflag[2] == true) {
+				allYakuflag = true;
+			}
+			if (allYakuflag == true)
+			{
+				for (int i = 0; i < 3; i++)
+				{
+					Yakuflag[i] = false;					
+				}		
+				allYakuflag = false;
 			}
 			break;
 
@@ -217,9 +328,11 @@ void GameScene:: ReelControll(int a) {
 			}
 			break;
 		}
+		
 	}
 	else {
 		allflag = false;
+		Print << U"aaaa";
 		for (int i = 0; i < 6; i++)
 			Reel_Tex[i].draw(Reel_NowPos[i]);
 	}
@@ -293,55 +406,4 @@ void GameScene::draw() const
 }
 
 ///memo
-//if (Reel_NowPos[0].y == ReelPos[0] || Reel_NowPos[0].y == ReelPos[1] ||
-			//   Reel_NowPos[0].y == ReelPos[2] || Reel_NowPos[0].y == ReelPos[3] ||
-			//   Reel_NowPos[0].y == ReelPos[4] || Reel_NowPos[0].y == ReelPos[5] || Reel_NowPos[0].y == ReelPos[6] ||
-			//   Reel_NowPos[1].y == ReelPos[0] || Reel_NowPos[1].y == ReelPos[1] ||
-			//   Reel_NowPos[1].y == ReelPos[2] || Reel_NowPos[1].y == ReelPos[3] ||
-			//   Reel_NowPos[1].y == ReelPos[4] || Reel_NowPos[1].y == ReelPos[5] || Reel_NowPos[1].y == ReelPos[6]) {
 
-			//	Reel_Tex[0].draw(Reel_NowPos[0]);
-			//	Reel_Tex[1].draw(Reel_NowPos[1]);
-			//}
-			//else//位置正しくなかったら
-			//{
-			//	Reel_NowPos[0].y += 40;
-			//	Reel_NowPos[1].y += 40;
-			//	Reel_Tex[0].draw(Reel_NowPos[0]);
-			//	Reel_Tex[1].draw(Reel_NowPos[1]);
-			//}
-
-//if (Reel_NowPos[2].y == ReelPos[0] || Reel_NowPos[2].y == ReelPos[1] ||
-//			   Reel_NowPos[2].y == ReelPos[2] || Reel_NowPos[2].y == ReelPos[3] ||
-//			   Reel_NowPos[2].y == ReelPos[4] || Reel_NowPos[2].y == ReelPos[5] || Reel_NowPos[2].y == ReelPos[6] ||
-//			   Reel_NowPos[3].y == ReelPos[0] || Reel_NowPos[3].y == ReelPos[1] ||
-//			   Reel_NowPos[3].y == ReelPos[2] || Reel_NowPos[3].y == ReelPos[3] ||
-//			   Reel_NowPos[3].y == ReelPos[4] || Reel_NowPos[3].y == ReelPos[5] || Reel_NowPos[3].y == ReelPos[6]) {
-//
-//	Reel_Tex[2].draw(Reel_NowPos[2]);
-//	Reel_Tex[3].draw(Reel_NowPos[3]);
-//}
-//else//位置正しくなかったら
-//{
-//	Reel_NowPos[2].y += 40;
-//	Reel_NowPos[3].y += 40;
-//	Reel_Tex[2].draw(Reel_NowPos[2]);
-//	Reel_Tex[3].draw(Reel_NowPos[3]);
-//}
-//if (Reel_NowPos[2].y == ReelPos[0] || Reel_NowPos[2].y == ReelPos[1] ||
-//			   Reel_NowPos[2].y == ReelPos[2] || Reel_NowPos[2].y == ReelPos[3] ||
-//			   Reel_NowPos[2].y == ReelPos[4] || Reel_NowPos[2].y == ReelPos[5] || Reel_NowPos[2].y == ReelPos[6] ||
-//			   Reel_NowPos[3].y == ReelPos[0] || Reel_NowPos[3].y == ReelPos[1] ||
-//			   Reel_NowPos[3].y == ReelPos[2] || Reel_NowPos[3].y == ReelPos[3] ||
-//			   Reel_NowPos[3].y == ReelPos[4] || Reel_NowPos[3].y == ReelPos[5] || Reel_NowPos[3].y == ReelPos[6]) {
-//
-//	Reel_Tex[2].draw(Reel_NowPos[2]);
-//	Reel_Tex[3].draw(Reel_NowPos[3]);
-//}
-//else//位置正しくなかったら
-//{
-//	Reel_NowPos[2].y += 40;
-//	Reel_NowPos[3].y += 40;
-//	Reel_Tex[2].draw(Reel_NowPos[2]);
-//	Reel_Tex[3].draw(Reel_NowPos[3]);
-////}
