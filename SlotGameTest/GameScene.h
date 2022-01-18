@@ -18,7 +18,7 @@ private:
 	};
 #pragma endregion
 
-
+	int32 m_money = 1000;
 	double delayTime = 0.0;//ディレイ時間
 	Vec2 NowMousePos = Vec2{ 0,0 };//マウスのいまのポジション
 
@@ -83,6 +83,8 @@ private:
 	int Rndins;
 	const int RndMax = 16384;
 //---------------------------------------------------------------
+
+//---------------------------------------------------------------
 	int yaku=0;
 	const int HitLange_1 = 0;
 	const int HitLange_2 = 112;
@@ -104,12 +106,12 @@ public:
 	GameScene(const InitData& init);//シーン管理
 	void update() override;
 	void draw() const override;//描画
-	void ReelGenetrate1();//リール回転
-	void ReelGenetrate2();//リール回転
-	void ReelGenetrate3();//リール回転
+	void ReelGenetrate(int a, int b, int x, int y, int z);
 	void StopButton();//ボタン停止
 	void ReelControll(int a);//あとの処理(入る役)
 	void ReelGen();//リール決定やフラグ管理
+	void StopButtonSC(int Rpos1, int Rpos2, int Rpos3,int yakuNo);
+	void Result(int YakuNo);
 };
 
 

@@ -31,7 +31,7 @@ void Main()
 		/*.setFadeColor(ColorF(1.0));*/
 
 	// （ゲームシーンから開始する場合はコメントを外す）
-	manager.init(State::GameScene);
+	//manager.init(State::GameScene);
 #pragma endregion
 
 	while (System::Update())

@@ -2,7 +2,7 @@
 StartScene::StartScene(const InitData& init)
 	: IScene(init) 
 {
-
+	
 }
 
 void StartScene::update()
@@ -39,9 +39,6 @@ void StartScene::draw() const
 
 	FontAsset(U"Menu")(U"はじめる").drawAt(m_startButton.center(), ColorF(0.25));
 	FontAsset(U"Menu")(U"おわる").drawAt(m_exitButton.center(), ColorF(0.25));
-
-	Rect(0, 500, Scene::Width(), Scene::Height() - 500)
-		.draw(Arg::top = ColorF(0.0, 0.0), Arg::bottom = ColorF(0.0, 0.5));
 
 	
 }
