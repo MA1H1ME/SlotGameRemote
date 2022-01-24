@@ -1,11 +1,11 @@
-﻿#include "StartScene.h"
-StartScene::StartScene(const InitData& init)
-	: IScene(init) 
+﻿#include "EndScene.h"
+EndScene::EndScene(const InitData& init)
+	: IScene(init)
 {
-	
+
 }
 
-void StartScene::update()
+void EndScene::update()
 {
 	m_startTransition.update(m_startButton.mouseOver());
 	m_exitTransition.update(m_exitButton.mouseOver());
@@ -28,18 +28,18 @@ void StartScene::update()
 }
 
 
-void StartScene::draw() const
+void EndScene::draw() const
 {
-	const String titleText = U"スロットゲーム";
+	const String titleText = U"ゲームオーバー";
 	const Vec2 center(Scene::Center().x, 120);
-	FontAsset(U"Title")(titleText).drawAt(center.movedBy(4, 6), ColorF(0.0, 0.5));
-	//FontAsset(U"Title")(titleText).drawAt(center);
+	FontAsset(U"Resultmenu")(titleText).drawAt(center.movedBy(4, 6), ColorF(0.0, 0.5));
+	FontAsset(U"Resultmenu")(titleText).drawAt(center);
 
 	m_startButton.draw(ColorF(1.0, m_startTransition.value())).drawFrame(2);
 	m_exitButton.draw(ColorF(1.0, m_exitTransition.value())).drawFrame(2);
 
-	FontAsset(U"Menu")(U"はじめる").drawAt(m_startButton.center(), ColorF(0.25));
+	FontAsset(U"Menu")(U"もう一度賭ける").drawAt(m_startButton.center(), ColorF(0.25));
 	FontAsset(U"Menu")(U"おわる").drawAt(m_exitButton.center(), ColorF(0.25));
 
-	
+
 }

@@ -2,6 +2,7 @@
 #include"Common.hpp"
 #include"StartScene.h"
 #include"GameScene.h"
+#include"EndScene.h"
 void Main()
 {
 	
@@ -19,16 +20,20 @@ void Main()
 	Scene::SetBackground(Color(200, 191, 231));
 
 	// 使用するフォントアセットを登録
-	FontAsset::Register(U"Title", 120, U"example/font/AnnyantRoman/AnnyantRoman.ttf");
+	FontAsset::Register(U"Resultmenu", 120, U"example/nekokaburi.otf");
+	FontAsset::Register(U"Title", 120, U"example/nekokaburi.otf");
 	FontAsset::Register(U"Menu", 30, Typeface::Regular);
 	FontAsset::Register(U"MONEY", 36, Typeface::Bold);
 	FontAsset::Register(U"Score", 36, Typeface::Bold);
+	
 
 	// シーンと遷移時の色を設定
 	MyApp manager;
 	manager
 		.add<StartScene>(State::StartScene)
-		.add<GameScene>(State::GameScene);
+		.add<GameScene>(State::GameScene)
+		.add<EndScene>(State::EndScene);
+
 		/*.setFadeColor(ColorF(1.0));*/
 
 	// （ゲームシーンから開始する場合はコメントを外す）

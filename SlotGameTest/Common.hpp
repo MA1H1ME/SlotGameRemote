@@ -5,8 +5,8 @@
 enum class State
 {
 	StartScene,
-
-	GameScene
+	GameScene,
+	EndScene
 };
 
 // ゲームデータ

@@ -17,11 +17,11 @@ private:
 		Texture {U"example/Reel/Reel3.png"},
 	};
 #pragma endregion
-	
+	int raute = 0;
 	int32 m_money = 1000;
 	double delayTime = 0.0;//ディレイ時間
 	Vec2 NowMousePos = Vec2{ 0,0 };//マウスのいまのポジション
-
+	int Latch = 100;
 //------------------------------------------------
 	//リールの初期位置
 	Array<int> reel_initialPos = {//リールの初期位置
@@ -73,6 +73,7 @@ private:
 		false,
 	};
 	bool allYakuflag = false;
+	bool cheryflag = false;
 //------------------------------------------------------------
 	// FPSシュミレーションステップ
 	const double stepSec = (1.0 / 200.0);
@@ -83,7 +84,7 @@ private:
 	int Rndins;
 	const int RndMax = 16384;
 //---------------------------------------------------------------
-	
+	Font GameOver_f{ 50 };
 //---------------------------------------------------------------
 	int yaku=0;
 	const int HitLange_1 = 0;

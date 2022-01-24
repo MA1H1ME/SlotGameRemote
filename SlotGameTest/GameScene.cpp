@@ -10,10 +10,12 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 void GameScene::update() {
 	
 		StopButton();
+	
 		ReelGen();
 		
 		getData().highScore = Max(getData().highScore, m_money);
-}
+		
+} 
 //リール回転関数---------------------------------------
 void GameScene::StopButton() {
 
@@ -37,15 +39,37 @@ void GameScene::StopButton() {
 				break;
 			}
 		}
-	}	
+	}
+	if (KeyA.down())
+	{
+		Stop_s.playOneShot();
+		Stopflag[0] = true;
+		Yakuflag[0] = true;
+
+	}
+	if (KeyS.down())
+	{
+		Stop_s.playOneShot();
+		Stopflag[1] = true;
+		Yakuflag[1] = true;
+
+	}
+	if (KeyD.down())
+	{
+		Stop_s.playOneShot();
+		Stopflag[2] = true;
+		Yakuflag[2] = true;
+
+	}
+	
 }
 
 void GameScene::ReelGen() {
 	if (Stopflag[0] && Stopflag[1] && Stopflag[2] && KeySpace.down()) {
 		allYakuflag = false;
 		allflag = true;
-		m_money -= 100;		
-		//Money_s.playOneShot();
+		m_money -= Latch;		
+		
 		Reba_s.play();
 
 		Sleep(1 * 1000);
@@ -54,9 +78,10 @@ void GameScene::ReelGen() {
 				Stopflag[i] = false;
 
 			Rndins = Random(0, RndMax);
-
-			if (Rndins >= HitLange_1 && Rndins <= HitLange_2)//0-			
-				yaku = 1;			
+			if (cheryflag==true)
+			{
+				yaku = 1;
+			}		
 			else if (Rndins > HitLange_2 && Rndins <= HitLange_3)//112			
 				yaku = 2;			
 			else if (Rndins > HitLange_3 && Rndins <= HitLange_4)//162-
@@ -81,7 +106,7 @@ void GameScene::ReelGen() {
 }
 
 void GameScene::StopButtonSC(int Rpos1,int Rpos2,int Rpos3,int yakuNo) {
-	Print << yakuNo;
+	
 	if (Stopflag[0] == true) {//ストップボタンが押されたら
 		Reel_Tex[0].draw(Reel_NowPos[0].x, ReelPos[Rpos1]);
 		Reel_Tex[1].draw(Reel_NowPos[1].x, ReelPos[Rpos1] + 720);		
@@ -103,6 +128,11 @@ void GameScene::StopButtonSC(int Rpos1,int Rpos2,int Rpos3,int yakuNo) {
 		for (int i = 0; i < 3; i++)
 			Yakuflag[i] = false;
 
+		if (m_money < Latch && allYakuflag == true)
+		{
+			
+			changeScene(State::EndScene);
+		}
 		allYakuflag = false;
 	}
 }
@@ -111,31 +141,39 @@ void GameScene::Result(int YakuNo) {
 	{
 	case 1://7
 		Atari_s.play();
-		m_money += 10000;
-		if ()
+		m_money += 100000;
+		raute++;
+		if (raute < 10)
 		{
-
+			cheryflag = true;
+		}
+		else
+		{
+			cheryflag = false;
+			raute = 0;
 		}
 		break;
 
 	case 2://チェリー
 		Atari_s.play();
 		m_money += 1000;
+		cheryflag = true;
+		
 		break;
 
 	case 3://プルーン
 		Atari_s.play();
-		m_money += 1000;
+		m_money += 400;
 		break;
 
 	case 4://オレンジ
 		Atari_s.play();
-		m_money += 1000;
+		m_money += 300;
 		break;
 
 	case 5://ベル
 		Atari_s.play();
-		m_money += 1000;
+		m_money += 200;
 		break;
 
 	case 6://バー
@@ -209,7 +247,7 @@ void GameScene:: ReelControll(int a) {
 	}
 	else {
 		allflag = false;
-		Print << U"aaaa";
+		
 		for (int i = 0; i < 6; i++)
 			Reel_Tex[i].draw(Reel_NowPos[i]);
 	}

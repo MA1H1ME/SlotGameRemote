@@ -113,6 +113,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="StartScene.cpp" />
@@ -314,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.hpp" />
+    <ClInclude Include="EndScene.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
