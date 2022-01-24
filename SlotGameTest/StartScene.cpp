@@ -24,6 +24,7 @@ void StartScene::update()
 	{
 		System::Exit();
 	}
+	FontAsset(U"Score")(U"High score: {}"_fmt(highScore)).drawAt(Vec2(620, 550));
 }
 
 

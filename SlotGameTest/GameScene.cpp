@@ -12,7 +12,7 @@ void GameScene::update() {
 		StopButton();
 		ReelGen();
 		
-	
+		getData().highScore = Max(getData().highScore, m_money);
 }
 //リール回転関数---------------------------------------
 void GameScene::StopButton() {
@@ -44,9 +44,10 @@ void GameScene::ReelGen() {
 	if (Stopflag[0] && Stopflag[1] && Stopflag[2] && KeySpace.down()) {
 		allYakuflag = false;
 		allflag = true;
-		m_money - 100;
+		m_money -= 100;		
 		//Money_s.playOneShot();
 		Reba_s.play();
+
 		Sleep(1 * 1000);
 		if (allflag == true){
 			for (int i = 0; i < 3; i++)
@@ -110,7 +111,11 @@ void GameScene::Result(int YakuNo) {
 	{
 	case 1://7
 		Atari_s.play();
-		m_money += 1000;
+		m_money += 10000;
+		if ()
+		{
+
+		}
 		break;
 
 	case 2://チェリー
@@ -238,7 +243,7 @@ void GameScene::draw() const
 	Circle{ buttonPos[0],ButtonSize }.draw(Palette::Red);
 	Circle{ buttonPos[1],ButtonSize }.draw(Palette::Red);
 	Circle{ buttonPos[2],ButtonSize }.draw(Palette::Red);
-	//FontAsset(U"MONEY")(m_money).draw(800,500, Palette::Black);
+	FontAsset(U"MONEY")(m_money).draw(900,50, Palette::Black);
 }
 
 ///memo

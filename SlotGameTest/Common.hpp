@@ -12,9 +12,7 @@ enum class State
 // ゲームデータ
 struct GameData
 {
-	Optional<int32>lastGameScore;
-
-	Array<int32>highScore = { 100,50,10 };
+	int32 highScore = 0;
 
 };
 

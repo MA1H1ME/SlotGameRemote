@@ -21,6 +21,7 @@ void Main()
 	// 使用するフォントアセットを登録
 	FontAsset::Register(U"Title", 120, U"example/font/AnnyantRoman/AnnyantRoman.ttf");
 	FontAsset::Register(U"Menu", 30, Typeface::Regular);
+	FontAsset::Register(U"MONEY", 36, Typeface::Bold);
 	FontAsset::Register(U"Score", 36, Typeface::Bold);
 
 	// シーンと遷移時の色を設定

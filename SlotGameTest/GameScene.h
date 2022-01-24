@@ -17,7 +17,7 @@ private:
 		Texture {U"example/Reel/Reel3.png"},
 	};
 #pragma endregion
-
+	
 	int32 m_money = 1000;
 	double delayTime = 0.0;//ディレイ時間
 	Vec2 NowMousePos = Vec2{ 0,0 };//マウスのいまのポジション
@@ -83,7 +83,7 @@ private:
 	int Rndins;
 	const int RndMax = 16384;
 //---------------------------------------------------------------
-
+	
 //---------------------------------------------------------------
 	int yaku=0;
 	const int HitLange_1 = 0;
