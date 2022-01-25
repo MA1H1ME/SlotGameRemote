@@ -141,9 +141,9 @@ void GameScene::Result(int YakuNo) {
 	{
 	case 1://7
 		Atari_s.play();
-		m_money += 100000;
+		m_money += 1000;
 		raute++;
-		if (raute < 10)
+		if (raute < 5)
 		{
 			cheryflag = true;
 		}
@@ -285,4 +285,5 @@ void GameScene::draw() const
 }
 
 ///memo
-
+//演出
+//ハイスコア
