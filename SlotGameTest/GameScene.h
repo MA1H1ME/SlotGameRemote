@@ -21,7 +21,7 @@ private:
 	int32 m_money = 1000;
 	double delayTime = 0.0;//ディレイ時間
 	Vec2 NowMousePos = Vec2{ 0,0 };//マウスのいまのポジション
-	int Latch = 100;
+	int Latch = 50;
 //------------------------------------------------
 	//リールの初期位置
 	Array<int> reel_initialPos = {//リールの初期位置

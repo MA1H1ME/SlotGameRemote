@@ -8,7 +8,10 @@ GameScene::GameScene(const InitData& init)//スコア引継ぎなどの数値
 }
 //アップデート関数(Manager管理)---------------------------------------
 void GameScene::update() {
-	
+	if (MouseR.down())
+	{
+		changeScene(State::EndScene);
+	}
 		StopButton();
 	
 		ReelGen();
